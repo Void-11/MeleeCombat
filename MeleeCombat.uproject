@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{A0223250-4A8D-2396-2BFF-9D90105FCD0A}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "MeleeCombat",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}
