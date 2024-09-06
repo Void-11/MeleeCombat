@@ -14,7 +14,13 @@ class MELEECOMBAT_API UPlayerAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 	
-	
+protected:
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float CurrentVelocity {0.0f};
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateVelocity();
 	
 	
 };
