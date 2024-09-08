@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Interfaces/MainPlayer.h"
 #include "MeleeCombatCharacter.generated.h"
 
 class USpringArmComponent;
@@ -16,7 +17,7 @@ struct FInputActionValue;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class AMeleeCombatCharacter : public ACharacter
+class AMeleeCombatCharacter : public ACharacter, public IMainPlayer
 {
 	GENERATED_BODY()
 

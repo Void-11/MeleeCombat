@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/Enemy.h"
 #include "Boss.generated.h"
 
 UCLASS()
-class MELEECOMBAT_API ABoss : public ACharacter
+class MELEECOMBAT_API ABoss : public ACharacter, public IEnemy
 {
 	GENERATED_BODY()
 
