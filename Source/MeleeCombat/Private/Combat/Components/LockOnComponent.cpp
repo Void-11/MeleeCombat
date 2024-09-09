@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Interfaces/Enemy.h"
 
 
 // Sets default values for this component's properties
@@ -37,8 +38,8 @@ void ULockOnComponent::StartLockOn(float Radius)
 	FHitResult OutResult;
 	FVector CurrentLocation{ OwnerRef->GetActorLocation() };
 	FCollisionShape Sphere{ FCollisionShape::MakeSphere(Radius) };
-	FCollisionQueryParams IgnorePrams{ 
-		FName(TEXT("Ignore Query Params")),
+	FCollisionQueryParams IgnoreParams{ 
+		FName(TEXT("Ignore Collision Params")),
 		false,
 		OwnerRef
 	};
@@ -50,11 +51,13 @@ void ULockOnComponent::StartLockOn(float Radius)
 		FQuat::Identity,
 		ECollisionChannel::ECC_GameTraceChannel1,
 		Sphere,
-		IgnorePrams
+		IgnoreParams
 	) };
 
 	if (!bHasFoundTarget) { return; }
 
+	if (!OutResult.GetActor()->Implements<UEnemy>()) { return; }
+	
 	CurrentTargetActor = OutResult.GetActor();
 
 	Controller->SetIgnoreLookInput(true);
@@ -62,11 +65,14 @@ void ULockOnComponent::StartLockOn(float Radius)
 	MovementComp->bUseControllerDesiredRotation = true;
 
 	SpringArmComp->TargetOffset = FVector{ 0.0, 0.0, 100.0 };
-
+	IEnemy::Execute_OnSelect(CurrentTargetActor);
+	
+	OnUpdatedTargetDelegate.Broadcast(CurrentTargetActor);
 }
 
 void ULockOnComponent::EndLockOn()
 {
+	IEnemy::Execute_OnDeselect(CurrentTargetActor);
 	CurrentTargetActor = nullptr;
 
 	MovementComp->bOrientRotationToMovement = true;
@@ -74,6 +80,7 @@ void ULockOnComponent::EndLockOn()
 	SpringArmComp->TargetOffset = FVector::ZeroVector;
 
 	Controller->ResetIgnoreLookInput();
+	OnUpdatedTargetDelegate.Broadcast(CurrentTargetActor);
 }
 
 void ULockOnComponent::ToggleLockOn(float Radius)

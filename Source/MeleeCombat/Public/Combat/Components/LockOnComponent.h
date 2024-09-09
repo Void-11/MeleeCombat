@@ -6,6 +6,12 @@
 #include "Components/ActorComponent.h"
 #include "LockOnComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_OneParam(
+	FOnUpdatedTargetSignature,
+	ULockOnComponent, OnUpdatedTargetDelegate,
+	AActor*, NewTargetActorRef
+);
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MELEECOMBAT_API ULockOnComponent : public UActorComponent
@@ -23,6 +29,10 @@ public:
 	ULockOnComponent();
 	
 	AActor* CurrentTargetActor;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnUpdatedTargetSignature OnUpdatedTargetDelegate;
+
 	
 protected:
 	// Called when the game starts

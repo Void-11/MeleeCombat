@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Character/PlayerAnimInstance.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -58,6 +59,11 @@ void AMeleeCombatCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+
+	PlayerAnim = Cast<UPlayerAnimInstance>(
+		GetMesh()->GetAnimInstance()
+	);
+
 }
 
 //////////////////////////////////////////////////////////////////////////
