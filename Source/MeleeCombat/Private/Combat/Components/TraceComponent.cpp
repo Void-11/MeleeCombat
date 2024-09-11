@@ -2,7 +2,8 @@
 
 
 #include "Combat/Components/TraceComponent.h"
-
+#include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values for this component's properties
 UTraceComponent::UTraceComponent()
@@ -34,16 +35,20 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	FQuat ShapeRotation{ SkeletalComp->GetSocketQuaternion(Rotation) };
 
 	TArray<FHitResult> OutResults;
+	
 	double WeapoDistance{ 
 		FVector::Distance(StartSocketLocation, EndSocketLocation)
 	};
+	
 	FVector BoxHalfExtent{ 
-		BoxCollisionLength, BoxCollisionLength, WeapoDistance 
+		BoxCollisionLength, BoxCollisionLength, WeapoDistance
 	};
+	
 	BoxHalfExtent /= 2; // BoxHalfExtent = BoxHalfExtent / 2;
 	FCollisionShape Box{
 		FCollisionShape::MakeBox(BoxHalfExtent)
 	};
+	
 	FCollisionQueryParams IgnoreParams{
 		FName { TEXT("Ignore Params") },
 		false,
@@ -60,12 +65,22 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 		IgnoreParams
 	) };
 
-	if (bHasFoundTargets)
+	if (bDebugMode)
 	{
-		UE_LOG(
-			LogTemp,
-			Warning,
-			TEXT("Target Found!")
+		FVector CenterPoint{
+			UKismetMathLibrary::VLerp(
+				StartSocketLocation, EndSocketLocation, 0.5f
+			)
+		};
+
+		UKismetSystemLibrary::DrawDebugBox(
+			GetWorld(),
+			CenterPoint,
+			Box.GetExtent(),
+			bHasFoundTargets ? FLinearColor::Green : FLinearColor::Red,
+			ShapeRotation.Rotator(),
+			1.0f,
+			2.0f
 		);
 	}
 
