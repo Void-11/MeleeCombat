@@ -36,12 +36,12 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 
 	TArray<FHitResult> OutResults;
 	
-	double WeapoDistance{ 
+	double WeaponDistance{ 
 		FVector::Distance(StartSocketLocation, EndSocketLocation)
 	};
 	
 	FVector BoxHalfExtent{ 
-		BoxCollisionLength, BoxCollisionLength, WeapoDistance
+		BoxCollisionLength, BoxCollisionLength, WeaponDistance
 	};
 	
 	BoxHalfExtent /= 2; // BoxHalfExtent = BoxHalfExtent / 2;
