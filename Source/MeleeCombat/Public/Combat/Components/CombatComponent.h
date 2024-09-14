@@ -19,6 +19,9 @@ class MELEECOMBAT_API UCombatComponent : public UActorComponent
 
 	UPROPERTY(VisibleAnywhere)
 	int ComboCounter{ 0 };
+
+	UPROPERTY(VisibleAnywhere)
+	bool bCanAttack{ true };
 	
 public:	
 	// Sets default values for this component's properties
@@ -34,6 +37,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void PlayerComboAttack();
+
+	UFUNCTION(BlueprintCallable)
+	void ManageResetAttack();
+
 
 	
 };

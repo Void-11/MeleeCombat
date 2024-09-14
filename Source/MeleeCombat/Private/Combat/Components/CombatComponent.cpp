@@ -37,6 +37,10 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UCombatComponent::PlayerComboAttack()
 {
+	if (!bCanAttack) { return; }
+
+	bCanAttack = false;
+
 	CharacterRef->PlayAnimMontage(AttackAnimations[ComboCounter]);
 
 	ComboCounter++;
@@ -49,5 +53,10 @@ void UCombatComponent::PlayerComboAttack()
 		(MaxCombo - 1)
 	);
 
+}
+
+void UCombatComponent::ManageResetAttack()
+{
+	bCanAttack = true;
 }
 
