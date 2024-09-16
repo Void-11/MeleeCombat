@@ -66,6 +66,11 @@ void AMeleeCombatCharacter::BeginPlay()
 
 }
 
+float AMeleeCombatCharacter::GetDamageAmount()
+{
+	return 10.0f;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 

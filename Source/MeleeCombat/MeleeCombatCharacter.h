@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "Interfaces/MainPlayer.h"
+#include "Interfaces/Attack.h"
 #include "MeleeCombatCharacter.generated.h"
 
 class USpringArmComponent;
@@ -17,7 +18,7 @@ struct FInputActionValue;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class AMeleeCombatCharacter : public ACharacter, public IMainPlayer
+class AMeleeCombatCharacter : public ACharacter, public IMainPlayer, public IAttack
 {
 	GENERATED_BODY()
 
@@ -56,9 +57,7 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
-
-protected:
+	
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
@@ -68,6 +67,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	class UPlayerAnimInstance* PlayerAnim;
 
+	virtual float GetDamageAmount() override;
 
 public:
 	/** Returns CameraBoom subobject **/

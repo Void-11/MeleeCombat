@@ -2,8 +2,11 @@
 
 
 #include "Combat/Components/TraceComponent.h"
+
+#include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Interfaces/Attack.h"
 
 // Sets default values for this component's properties
 UTraceComponent::UTraceComponent()
@@ -84,5 +87,38 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 		);
 	}
 
+	if (OutResults.Num() == 0) { return; }
+
+	float CharacterDamage{ 0.0f };
+
+	IAttack* FighterRef{ Cast<IAttack>(GetOwner()) };
+
+	if (FighterRef)
+	{ 
+		CharacterDamage = FighterRef->GetDamageAmount();
+	}
+
+	FDamageEvent TargetAttackedEvent;
+
+	for (const FHitResult& Hit: OutResults)
+	{
+		AActor* TargetActor{ Hit.GetActor() };
+
+		if (TargetsToIgnore.Contains(TargetActor)) { continue; }
+		
+		TargetActor->TakeDamage(
+			CharacterDamage,
+			TargetAttackedEvent,
+			GetOwner()->GetInstigatorController(),
+			GetOwner()  
+		);
+
+		TargetsToIgnore.AddUnique(TargetActor);
+	}
+}
+
+void UTraceComponent::ManageResetAttack()
+{
+	TargetsToIgnore.Empty();
 }
 
