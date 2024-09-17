@@ -2,7 +2,6 @@
 
 
 #include "Combat/Components/TraceComponent.h"
-
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -33,6 +32,8 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (!bIsAttacking) { return; }
+	
 	FVector StartSocketLocation{ SkeletalComp->GetSocketLocation(Start) };
 	FVector EndSocketLocation{ SkeletalComp->GetSocketLocation(End) };
 	FQuat ShapeRotation{ SkeletalComp->GetSocketQuaternion(Rotation) };
