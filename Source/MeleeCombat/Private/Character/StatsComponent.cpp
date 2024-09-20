@@ -3,6 +3,8 @@
 
 #include "Character/StatsComponent.h"
 
+#include "Kismet/KismetMathLibrary.h"
+
 
 // Sets default values for this component's properties
 UStatsComponent::UStatsComponent()
@@ -28,5 +30,18 @@ void UStatsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+void UStatsComponent::DecreaseHealth(float Amount)
+{
+	if (Stats[EStats::Health] <= 0) { return; }
+
+	Stats[EStats::Health] -= Amount;
+	Stats[EStats::Health] = UKismetMathLibrary::FClamp(
+		Stats[EStats::Health],
+		0,
+		Stats[EStats::MaxHealth]
+	);
+
 }
 

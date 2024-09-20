@@ -48,7 +48,25 @@ class AMeleeCombatCharacter : public ACharacter, public IMainPlayer, public IAtt
 
 public:
 	AMeleeCombatCharacter();
-	
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UStatsComponent* StatsComp;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class ULockOnComponent* LockOnComp;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UCombatComponent* CombatComp;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UTraceComponent* TraceComp;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UBlockComponent* BlockComp;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UPlayerActionsComponent* PlayerActionsComp;
+
 
 protected:
 

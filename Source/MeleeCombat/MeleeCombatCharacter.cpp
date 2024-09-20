@@ -11,6 +11,14 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Character/PlayerAnimInstance.h"
+#include "Character/StatsComponent.h"
+#include "Character/EStats.h"
+#include "Combat/Components/LockOnComponent.h"
+#include "Combat/Components/CombatComponent.h"
+#include "Combat/Components/TraceComponent.h"
+#include "Combat/Components/BlockComponent.h"
+#include "Character/PlayerActionsComponent.h"
+
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -53,6 +61,14 @@ AMeleeCombatCharacter::AMeleeCombatCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+	PrimaryActorTick.bCanEverTick = true;
+	StatsComp = CreateDefaultSubobject<UStatsComponent>(TEXT("Stats Component"));
+	LockOnComp = CreateDefaultSubobject<ULockOnComponent>(TEXT("LockOn Component"));
+	CombatComp = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat Component"));
+	TraceComp = CreateDefaultSubobject<UTraceComponent>(TEXT("Trace Component"));
+	BlockComp = CreateDefaultSubobject<UBlockComponent>(TEXT("Block Component"));
+	PlayerActionsComp = CreateDefaultSubobject<UPlayerActionsComponent>(TEXT("Player Actions Component"));
+
 }
 
 void AMeleeCombatCharacter::BeginPlay()
@@ -68,7 +84,7 @@ void AMeleeCombatCharacter::BeginPlay()
 
 float AMeleeCombatCharacter::GetDamageAmount()
 {
-	return 10.0f;
+	return StatsComp->Stats[EStats::Strength];
 }
 
 //////////////////////////////////////////////////////////////////////////
