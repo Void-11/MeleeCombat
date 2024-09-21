@@ -29,5 +29,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void DecreaseHealth(float Amount);
+
+	UFUNCTION(BlueprintCallable)
+	void DecreaseStamina(float Amount);
 	
 };

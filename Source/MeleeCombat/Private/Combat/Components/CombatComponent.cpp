@@ -3,6 +3,7 @@
 
 #include "Combat/Components/CombatComponent.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/MainPlayer.h"
 #include "Kismet/KismetMathLibrary.h"
 
 
@@ -37,6 +38,16 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UCombatComponent::PlayerComboAttack()
 {
+	if (CharacterRef->Implements<UMainPlayer>()) 
+	{
+		IMainPlayer* IPlayerRef{ Cast<IMainPlayer>(CharacterRef) };
+
+		if (IPlayerRef && !IPlayerRef->HasSufficientStamina(StaminaAmount)) 
+		{
+			return;
+		}
+	}
+
 	if (!bCanAttack) { return; }
 
 	bCanAttack = false;
@@ -53,6 +64,7 @@ void UCombatComponent::PlayerComboAttack()
 		(MaxCombo - 1)
 	);
 
+	OnAttackPerformedDelegate.Broadcast(StaminaAmount);
 }
 
 void UCombatComponent::ManageResetAttack()

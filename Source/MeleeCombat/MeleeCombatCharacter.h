@@ -87,6 +87,8 @@ protected:
 
 	virtual float GetDamageAmount() override;
 
+	virtual bool HasSufficientStamina(float Cost) override;
+
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

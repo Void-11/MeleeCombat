@@ -87,6 +87,11 @@ float AMeleeCombatCharacter::GetDamageAmount()
 	return StatsComp->Stats[EStats::Strength];
 }
 
+bool AMeleeCombatCharacter::HasSufficientStamina(float Cost)
+{
+	return StatsComp->Stats[EStats::Stamina] >= Cost;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
