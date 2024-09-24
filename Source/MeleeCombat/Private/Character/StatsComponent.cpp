@@ -4,6 +4,7 @@
 #include "Character/StatsComponent.h"
 
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 
 // Sets default values for this component's properties
@@ -54,5 +55,39 @@ void UStatsComponent::DecreaseStamina(float Amount)
 		0,
 		Stats[EStats::MaxStamina]
 	);
+
+	bCanRegen = false;
+
+	FLatentActionInfo FunctionInfo{
+		0,
+		100,
+		TEXT("EnableRegen"),
+		this
+	};
+
+	UKismetSystemLibrary::RetriggerableDelay(
+		GetWorld(),
+		StaminaDelayDuration,
+		FunctionInfo
+	);
+
+}
+
+void UStatsComponent::RegenerateStamina()
+{
+	if (!bCanRegen) { return; }
+
+	Stats[EStats::Stamina] = UKismetMathLibrary::FInterpTo_Constant(
+		Stats[EStats::Stamina],
+		Stats[EStats::MaxStamina],
+		GetWorld()->DeltaTimeSeconds,
+		StaminaRegenRate
+	);
+
+}
+
+void UStatsComponent::EnableRegeneration()
+{
+	bCanRegen = true;
 }
 

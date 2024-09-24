@@ -43,10 +43,18 @@ void UPlayerActionsComponent::TickComponent(float DeltaTime, ELevelTick TickType
 
 void UPlayerActionsComponent::Sprinting()
 {
-	if (!IPlayerRef->HasSufficientStamina(SprintingAmount)) { return; }
+	if (!IPlayerRef->HasSufficientStamina(SprintingAmount)) 
+	{ 
+		Walking();
+		return; 
+	}
+
+	if (MovementComp->Velocity.Equals(FVector::ZeroVector, 1)) { return; }
+
     
     	MovementComp->MaxWalkSpeed = SprintingSpeed;
 
+	OnSprintDelegate.Broadcast(SprintingAmount);
 }
 
 void UPlayerActionsComponent::Walking()
