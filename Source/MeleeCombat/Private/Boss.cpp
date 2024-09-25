@@ -33,3 +33,10 @@ void ABoss::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void ABoss::DetectPawn(APawn* DetectedPawn, APawn* PawnToDetect)
+{
+	if (DetectedPawn != PawnToDetect) { return; }
+
+	UE_LOG(LogTemp, Warning, TEXT("Player Detected!"));
+}
+
