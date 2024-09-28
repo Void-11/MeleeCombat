@@ -2,7 +2,6 @@
 
 
 #include "Character/PlayerActionsComponent.h"
-
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Interfaces/MainPlayer.h"
@@ -51,9 +50,7 @@ void UPlayerActionsComponent::Sprinting()
 
 	if (MovementComp->Velocity.Equals(FVector::ZeroVector, 1)) { return; }
 
-    
-    	MovementComp->MaxWalkSpeed = SprintingSpeed;
-
+	MovementComp->MaxWalkSpeed = SprintingSpeed;
 	OnSprintDelegate.Broadcast(SprintingAmount);
 }
 

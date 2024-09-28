@@ -47,6 +47,5 @@ public:
 
 	UFUNCTION()
 	void EnableRegeneration();
-
 	
 };

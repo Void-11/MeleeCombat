@@ -50,7 +50,7 @@ public:
 	AMeleeCombatCharacter();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	class UStatsComponent* StatsComp;
+	class UStatsComponent* StatComp;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	class ULockOnComponent* LockOnComp;
@@ -85,14 +85,16 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	class UPlayerAnimInstance* PlayerAnim;
 
-	virtual float GetDamageAmount() override;
-
-	virtual bool HasSufficientStamina(float Cost) override;
-
 public:
+	
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	virtual float GetDamageAmount() override;
+
+	virtual bool HasSufficientStamina(float Cost) override;
+
 };
 

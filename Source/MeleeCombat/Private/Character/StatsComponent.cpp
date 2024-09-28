@@ -2,7 +2,6 @@
 
 
 #include "Character/StatsComponent.h"
-
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -43,7 +42,6 @@ void UStatsComponent::DecreaseHealth(float Amount)
 		0,
 		Stats[EStats::MaxHealth]
 	);
-
 }
 
 void UStatsComponent::DecreaseStamina(float Amount)
