@@ -6,7 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "BlockComponent.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MELEECOMBAT_API UBlockComponent : public UActorComponent
 {
@@ -23,7 +22,4 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-		
-	
 };

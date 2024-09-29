@@ -48,6 +48,4 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ManageResetAttack();
-
-	
 };

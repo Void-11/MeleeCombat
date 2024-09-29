@@ -14,9 +14,6 @@ class UAttack : public UInterface
 	GENERATED_BODY()
 };
 
-/**
- * 
- */
 class MELEECOMBAT_API IAttack
 {
 	GENERATED_BODY()

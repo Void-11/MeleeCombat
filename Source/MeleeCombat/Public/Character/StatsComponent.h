@@ -13,7 +13,7 @@ class MELEECOMBAT_API UStatsComponent : public UActorComponent
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere)
-	double StaminaRegenRate{ 10.0 };
+	double StaminaRegenRate{ 5.0 };
 
 	UPROPERTY(VisibleAnywhere)
 	bool bCanRegen{ true };

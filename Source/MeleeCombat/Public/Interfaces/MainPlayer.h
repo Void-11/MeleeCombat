@@ -13,9 +13,6 @@ class UMainPlayer : public UInterface
 	GENERATED_BODY()
 };
 
-/**
- * 
- */
 class MELEECOMBAT_API IMainPlayer
 {
 	GENERATED_BODY()
