@@ -39,4 +39,3 @@ void ABoss::DetectPawn(APawn* DetectedPawn, APawn* PawnToDetect)
 
 	UE_LOG(LogTemp, Warning, TEXT("Player Detected!"));
 }
-
