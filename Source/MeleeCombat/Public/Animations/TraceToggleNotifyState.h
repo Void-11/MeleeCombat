@@ -6,9 +6,6 @@
 #include "Animation/AnimNotifies/AnimNotifyState.h"
 #include "TraceToggleNotifyState.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class MELEECOMBAT_API UTraceToggleNotifyState : public UAnimNotifyState
 {
