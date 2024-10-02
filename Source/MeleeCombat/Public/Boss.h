@@ -5,12 +5,18 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/Enemy.h"
+#include "Character/EEnemyState.h"
 #include "Boss.generated.h"
 
 UCLASS()
 class MELEECOMBAT_API ABoss : public ACharacter, public IEnemy
 {
 	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<EEnemyState> InitialState;
+
+	class UBlackboardComponent* BlackboardComp;
 
 public:
 	// Sets default values for this character's properties

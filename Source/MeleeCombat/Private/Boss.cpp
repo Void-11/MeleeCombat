@@ -2,7 +2,9 @@
 
 
 #include "Boss.h"
+#include "AIController.h"
 #include "Character/StatsComponent.h"
+#include "Runtime/AIModule/Classes/BehaviorTree/BlackboardComponent.h"
 
 // Sets default values
 ABoss::ABoss()
@@ -16,7 +18,14 @@ ABoss::ABoss()
 void ABoss::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	BlackboardComp = GetController<AAIController>()
+		->GetBlackboardComponent();
+
+	BlackboardComp->SetValueAsEnum(
+		TEXT("CurrentState"),
+		InitialState
+	);
 }
 
 // Called every frame
@@ -35,7 +44,15 @@ void ABoss::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ABoss::DetectPawn(APawn* DetectedPawn, APawn* PawnToDetect)
 {
-	if (DetectedPawn != PawnToDetect) { return; }
+	EEnemyState CurrentState{
+		static_cast<EEnemyState>(BlackboardComp->GetValueAsEnum(TEXT("CurrentState")))
+	};
 
-	UE_LOG(LogTemp, Warning, TEXT("Player Detected!"));
+	if (DetectedPawn != PawnToDetect || CurrentState != EEnemyState::Idle) { return; }
+
+
+	BlackboardComp->SetValueAsEnum(
+		TEXT("CurrentState"),
+		EEnemyState::Range
+	);
 }
