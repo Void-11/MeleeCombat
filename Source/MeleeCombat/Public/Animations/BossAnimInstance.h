@@ -15,5 +15,4 @@ protected:
 	
 	UPROPERTY(BlueprintReadWrite)
 	float CurrentSpeed{ 0.0f };
-	
 };
