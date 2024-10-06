@@ -3,6 +3,11 @@
 
 #include "Combat/BossProjectile.h"
 
+#include "Components/SphereComponent.h"
+#include "Engine/DamageEvents.h"
+#include "GameFramework/ProjectileMovementComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+
 
 // Sets default values
 ABossProjectile::ABossProjectile()
@@ -32,7 +37,37 @@ void ABossProjectile::HandleBeginOverlap(AActor* OtherActor)
 
 	if (!PawnRef->IsPlayerControlled()) { return; }
 
-	UE_LOG(LogTemp, Warning, TEXT("Overlapped with Player!"));
-	
+	FindComponentByClass<UParticleSystemComponent>()
+		->SetTemplate(HitTemplate);
+
+	FindComponentByClass<UProjectileMovementComponent>()
+		->StopMovementImmediately();
+
+	FTimerHandle DeathTimerHandle{};
+
+	GetWorldTimerManager().SetTimer(
+		DeathTimerHandle,
+		this,
+		&ABossProjectile::DestroyProjectile,
+		0.5f
+	);
+
+	FindComponentByClass<USphereComponent>()
+		->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	FDamageEvent ProjectileAttackEvent{};
+
+	PawnRef->TakeDamage(
+		Damage,
+		ProjectileAttackEvent,
+		PawnRef->GetController(),
+		this
+	);
+
+}
+
+void ABossProjectile::DestroyProjectile()
+{
+	Destroy();
 }
 

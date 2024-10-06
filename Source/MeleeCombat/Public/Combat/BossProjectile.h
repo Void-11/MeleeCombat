@@ -10,7 +10,13 @@ UCLASS()
 class MELEECOMBAT_API ABossProjectile : public AActor
 {
 	GENERATED_BODY()
-	
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* HitTemplate;
+
+	UPROPERTY(EditAnywhere)
+	float Damage{ 10.0f };
+
 public:	
 	// Sets default values for this actor's properties
 	ABossProjectile();
@@ -25,4 +31,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void HandleBeginOverlap(AActor* OtherActor);
+
+	UFUNCTION()
+	void DestroyProjectile();
+
 };

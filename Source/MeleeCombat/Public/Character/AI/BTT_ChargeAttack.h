@@ -4,18 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
-#include "BTT_RangeAttack.generated.h"
+#include "BTT_ChargeAttack.generated.h"
 
 UCLASS()
-class MELEECOMBAT_API UBTT_RangeAttack : public UBTTaskNode
+class MELEECOMBAT_API UBTT_ChargeAttack : public UBTTaskNode
 {
 	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere)
-	UAnimMontage* AnimMontage;
-
-	double Threshold{ 0.9 };
-
+	
 public:
 	
 	virtual EBTNodeResult::Type ExecuteTask(
