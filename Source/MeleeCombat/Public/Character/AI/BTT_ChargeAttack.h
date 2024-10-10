@@ -22,6 +22,13 @@ class MELEECOMBAT_API UBTT_ChargeAttack : public UBTTaskNode
 
 	FScriptDelegate MoveCompletedDelegate;
 
+	float InitialWalkSpeed;
+
+	UPROPERTY(EditAnywhere)
+	float ChargeWalkSpeed{ 2000.0f };
+
+	bool bIsFinished{ false };
+
 protected:
 	
 	virtual void TickTask(
