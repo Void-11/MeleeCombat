@@ -6,10 +6,11 @@
 #include "GameFramework/Character.h"
 #include "Interfaces/Enemy.h"
 #include "Character/EEnemyState.h"
+#include "Interfaces/Attack.h"
 #include "Boss.generated.h"
 
 UCLASS()
-class MELEECOMBAT_API ABoss : public ACharacter, public IEnemy
+class MELEECOMBAT_API ABoss : public ACharacter, public IEnemy, public IAttack
 {
 	GENERATED_BODY()
 
@@ -38,4 +39,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void DetectPawn(APawn* DetectedPawn, APawn* PawnToDetect);
+
+	virtual float GetDamageAmount() override;
 };

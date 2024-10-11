@@ -56,3 +56,8 @@ void ABoss::DetectPawn(APawn* DetectedPawn, APawn* PawnToDetect)
 		EEnemyState::Range
 	);
 }
+
+float ABoss::GetDamageAmount()
+{
+	return StatsComp->Stats[EStats::Strength];
+}
