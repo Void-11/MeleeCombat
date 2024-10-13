@@ -62,7 +62,7 @@ AMeleeCombatCharacter::AMeleeCombatCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 	PrimaryActorTick.bCanEverTick = true;
-	StatComp = CreateDefaultSubobject<UStatsComponent>(TEXT("Stats Component"));
+	StatsComp = CreateDefaultSubobject<UStatsComponent>(TEXT("Stats Component"));
 	LockOnComp = CreateDefaultSubobject<ULockOnComponent>(TEXT("LockOn Component"));
 	CombatComp = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat Component"));
 	TraceComp = CreateDefaultSubobject<UTraceComponent>(TEXT("Trace Component"));
@@ -83,12 +83,12 @@ void AMeleeCombatCharacter::BeginPlay()
 
 float AMeleeCombatCharacter::GetDamageAmount()
 {
-	return StatComp->Stats[EStats::Strength];
+	return StatsComp->Stats[EStats::Strength];
 }
 
 bool AMeleeCombatCharacter::HasSufficientStamina(float Cost)
 {
-	return StatComp->Stats[EStats::Stamina] >= Cost;
+	return StatsComp->Stats[EStats::Stamina] >= Cost;
 }
 
 //////////////////////////////////////////////////////////////////////////
