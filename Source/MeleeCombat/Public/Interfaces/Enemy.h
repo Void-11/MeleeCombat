@@ -14,6 +14,9 @@ class UEnemy : public UInterface
 	GENERATED_BODY()
 };
 
+/**
+ * 
+ */
 class MELEECOMBAT_API IEnemy
 {
 	GENERATED_BODY()
@@ -26,5 +29,6 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnDeselect();
+
 	
 };

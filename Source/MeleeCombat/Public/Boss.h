@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/Enemy.h"
-#include "Character/EEnemyState.h"
+#include "Character/EBossState.h"
 #include "Interfaces/Attack.h"
 #include "Boss.generated.h"
 
@@ -15,9 +15,10 @@ class MELEECOMBAT_API ABoss : public ACharacter, public IEnemy, public IAttack
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere)
-	TEnumAsByte<EEnemyState> InitialState;
+	TEnumAsByte<EBossState> InitialState;
 
 	class UBlackboardComponent* BlackboardComp;
+
 
 public:
 	// Sets default values for this character's properties
@@ -25,6 +26,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UStatsComponent* StatsComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UCombatComponent* CombatComp;
 
 protected:
 	// Called when the game starts or when spawned
@@ -41,4 +45,10 @@ public:
 	void DetectPawn(APawn* DetectedPawn, APawn* PawnToDetect);
 
 	virtual float GetDamageAmount() override;
+
+	virtual void Attack() override;
+
+	virtual float GetAnimDuration() override;
+
+	virtual float GetMeleeRange() override;
 };

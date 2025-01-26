@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "Combat/FTraceSockets.h"
+#include "Components/ActorComponent.h"
 #include "TraceComponent.generated.h"
 
 
@@ -17,7 +17,7 @@ class MELEECOMBAT_API UTraceComponent : public UActorComponent
 
 	UPROPERTY(EditAnywhere)
 	TArray<FTraceSockets> Sockets;
-	
+
 	UPROPERTY(EditAnywhere)
 	double BoxCollisionLength{ 30.0 };
 
@@ -43,4 +43,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ManageResetAttack();
+
+	
 };

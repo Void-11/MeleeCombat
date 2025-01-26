@@ -6,6 +6,9 @@
 #include "Animation/AnimInstance.h"
 #include "PlayerAnimInstance.generated.h"
 
+/**
+ * 
+ */
 UCLASS()
 class MELEECOMBAT_API UPlayerAnimInstance : public UAnimInstance
 {

@@ -10,11 +10,14 @@ UCLASS()
 class MELEECOMBAT_API UBossAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
-
+	
 protected:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float CurrentSpeed{ 0.0f };
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateSpeed();
 
 public:
 	

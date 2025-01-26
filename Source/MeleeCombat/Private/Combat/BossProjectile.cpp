@@ -1,13 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Combat/BossProjectile.h"
-
 #include "Components/SphereComponent.h"
 #include "Engine/DamageEvents.h"
-#include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
-
+#include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values
 ABossProjectile::ABossProjectile()
@@ -31,7 +28,7 @@ void ABossProjectile::Tick(float DeltaTime)
 
 }
 
-void ABossProjectile::HandleBeginOverlap(AActor* OtherActor)
+void ABossProjectile::ManageBeginOverlap(AActor* OtherActor)
 {
 	APawn* PawnRef{ Cast<APawn>(OtherActor) };
 

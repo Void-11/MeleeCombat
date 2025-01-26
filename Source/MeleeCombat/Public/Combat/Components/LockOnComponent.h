@@ -12,6 +12,7 @@ DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_OneParam(
 	AActor*, NewTargetActorRef
 );
 
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MELEECOMBAT_API ULockOnComponent : public UActorComponent
 {
@@ -31,6 +32,7 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FOnUpdatedTargetSignature OnUpdatedTargetDelegate;
+
 	
 protected:
 	// Called when the game starts
@@ -50,4 +52,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+		
+	
 };

@@ -13,6 +13,8 @@ UTraceComponent::UTraceComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
+
+	// ...
 }
 
 
@@ -34,8 +36,7 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	
 	TArray<FHitResult> AllResults;
 
-	for (const FTraceSockets Socket: Sockets)
-	{
+	for (const FTraceSockets Socket: Sockets) {
 		FVector StartSocketLocation{ 
 			SkeletalComp->GetSocketLocation(Socket.Start) 
 		};
@@ -47,20 +48,16 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 		};
 
 		TArray<FHitResult> OutResults;
-	
-		double WeaponDistance{ 
+		double WeaponDistance{
 			FVector::Distance(StartSocketLocation, EndSocketLocation)
 		};
-	
-		FVector BoxHalfExtent{ 
+		FVector BoxHalfExtent{
 			BoxCollisionLength, BoxCollisionLength, WeaponDistance
 		};
-	
 		BoxHalfExtent /= 2; // BoxHalfExtent = BoxHalfExtent / 2;
 		FCollisionShape Box{
 			FCollisionShape::MakeBox(BoxHalfExtent)
 		};
-	
 		FCollisionQueryParams IgnoreParams{
 			FName { TEXT("Ignore Params") },
 			false,
@@ -76,6 +73,10 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 			Box,
 			IgnoreParams
 		) };
+
+		for (FHitResult Hit: OutResults) {
+			AllResults.Add(Hit);
+		}
 
 		if (bDebugMode)
 		{

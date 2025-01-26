@@ -22,10 +22,10 @@ class MELEECOMBAT_API UBTT_ChargeAttack : public UBTTaskNode
 
 	FScriptDelegate MoveCompletedDelegate;
 
-	float InitialWalkSpeed;
+	float OriginalWalkSpeed;
 
 	UPROPERTY(EditAnywhere)
-	float ChargeWalkSpeed{ 2000.0f };
+	float ChargeWalkSpeed{ 3000.0f };
 
 	bool bIsFinished{ false };
 
@@ -37,6 +37,7 @@ protected:
 		float DeltaSeconds
 	) override;
 
+	
 public:
 
 	UBTT_ChargeAttack();

@@ -50,7 +50,7 @@ public:
 	AMeleeCombatCharacter();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	class UStatsComponent* StatsComp;
+	class UStatsComponent* StatComp;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	class ULockOnComponent* LockOnComp;

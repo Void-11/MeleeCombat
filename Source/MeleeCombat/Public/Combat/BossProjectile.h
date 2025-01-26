@@ -30,9 +30,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void HandleBeginOverlap(AActor* OtherActor);
+	void ManageBeginOverlap(AActor* OtherActor);
 
 	UFUNCTION()
 	void DestroyProjectile();
-
 };
